@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expense &amp; Budget Visualizer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-theme="light">
+    <header>
+      <h1>Expense &amp; Budget Visualizer</h1>
+      <button id="theme-toggle" aria-label="Switch to dark mode">🌙 Dark Mode</button>
+    </header>
+
+    <main>
+      <!-- Total spending card (Req 5) -->
+      <section id="total-section" aria-label="Total spending">
+        <p>Total Balance</p>
+        <p id="total-display">Rp0</p>
+      </section>
+
+      <!-- Add expense form (Req 2, 9) -->
+      <section id="form-section">
+        <h2>Add Expense</h2>
+        <form id="expense-form" novalidate>
+          <label for="item-name">Item Name</label>
+          <input type="text" id="item-name" name="item-name" placeholder="e.g. Lunch" autocomplete="off" />
+          <span class="error" id="error-name" role="alert" aria-live="polite"></span>
+
+          <label for="amount">Amount (Rp)</label>
+          <input type="number" id="amount" name="amount" placeholder="e.g. 25000" min="1" step="any" />
+          <span class="error" id="error-amount" role="alert" aria-live="polite"></span>
+
+          <label for="category">Category</label>
+          <select id="category" name="category">
+            <option value="">-- Select Category --</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Fun">Fun</option>
+          </select>
+          <span class="error" id="error-category" role="alert" aria-live="polite"></span>
+
+          <button type="submit">Add Expense</button>
+        </form>
+      </section>
+
+      <!-- Pie chart (Req 6) -->
+      <section id="chart-section" aria-label="Spending by category">
+        <h2>Spending by Category</h2>
+        <div id="chart-container">
+          <canvas id="spending-chart" aria-label="Pie chart of spending by category" role="img"></canvas>
+          <p id="chart-empty-state" hidden>No spending data available.</p>
+        </div>
+      </section>
+
+      <!-- Sort controls (Req 13) -->
+      <section id="sort-section" aria-label="Sort transactions">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="highest">Highest Amount</option>
+          <option value="lowest">Lowest Amount</option>
+        </select>
+      </section>
+
+      <!-- Transaction list (Req 4) -->
+      <section id="list-section" aria-label="Transaction history">
+        <h2>Transaction History</h2>
+        <ul id="transaction-list" aria-label="List of transactions"></ul>
+      </section>
+
+      <!-- Monthly summary (Req 14) -->
+      <section id="monthly-section" aria-label="Monthly summary">
+        <h2>Monthly Summary</h2>
+        <div id="month-nav">
+          <button id="prev-month" aria-label="Previous month">&#8592;</button>
+          <span id="active-month-label"></span>
+          <button id="next-month" aria-label="Next month">&#8594;</button>
+        </div>
+        <p id="monthly-total"></p>
+      </section>
+    </main>
+
+    <script defer src="js/script.js"></script>
+  </body>
+</html>
